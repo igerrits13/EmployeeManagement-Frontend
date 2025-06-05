@@ -35,3 +35,7 @@ Create new project:
 create new component:
 
 - "ng g c employee-table"
+
+Create new service:
+
+- "ng g s employee"
