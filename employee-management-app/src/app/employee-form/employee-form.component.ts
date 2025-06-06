@@ -36,9 +36,13 @@ export class EmployeeFormComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((result) => {
       const id = result.get('id');
-      // ID parameter only exists if in edit mode
+      // ID parameter only exists if in edit mode, then get the current employee and update form information
       if (id) {
         this.isEditing = true;
+        this.employeeService.getEmployeeById(Number(id)).subscribe({
+          next: (result) => (this.employee = result),
+          error: (err) => (this.errorMessage = `Error (${err.status})`),
+        });
       }
     });
   }
