@@ -1,8 +1,8 @@
+import { Employee } from './../models/employee';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
-import { Employee } from '../models/employee';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,11 @@ export class EmployeeService {
   // Create a new employee
   createEmployee(employee: Employee): Observable<Employee> {
     return this.htttp.post<Employee>(this.apiUrl, employee);
+  }
+
+  // Update a employee by employee
+  editEmployee(employee: Employee): Observable<Employee> {
+    return this.htttp.put<Employee>(`${this.apiUrl}/${employee.id}`, employee);
   }
 
   // Delete a employee by id
