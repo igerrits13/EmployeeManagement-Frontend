@@ -39,3 +39,7 @@ create new component:
 Create new service:
 
 - "ng g s employee"
+
+Create a new form:
+
+- "ng g c employee-form"
