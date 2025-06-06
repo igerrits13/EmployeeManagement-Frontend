@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Employee } from '../../models/employee';
 import { EmployeeService } from '../employee.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.css',
 })
-export class EmployeeFormComponent {
+export class EmployeeFormComponent implements OnInit {
   // Employee form to hold informaiton
   employee: Employee = {
     id: 0,
@@ -23,13 +23,25 @@ export class EmployeeFormComponent {
     position: '',
   };
 
+  isEditing: boolean = false;
   errorMessage: string = '';
 
   // Initialize the employee service
   constructor(
     private employeeService: EmployeeService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((result) => {
+      const id = result.get('id');
+      // ID parameter only exists if in edit mode
+      if (id) {
+        this.isEditing = true;
+      }
+    });
+  }
 
   // Submit function
   onSubmit(): void {
