@@ -17,4 +17,9 @@ export class EmployeeService {
   getEmployees(): Observable<Employee[]> {
     return this.htttp.get<Employee[]>(this.apiUrl);
   }
+
+  // Create a new employee
+  createEmployee(employee: Employee): Observable<Employee> {
+    return this.htttp.post<Employee>(this.apiUrl, employee);
+  }
 }
