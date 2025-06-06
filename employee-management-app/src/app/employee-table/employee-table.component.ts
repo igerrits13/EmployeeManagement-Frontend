@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../models/employee';
 import { EmployeeService } from '../employee.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'employee-table',
@@ -15,7 +16,10 @@ export class EmployeeTableComponent {
   employees: Employee[] = [];
 
   // Initialize employee service
-  constructor(private employeeService: EmployeeService) {}
+  constructor(
+    private employeeService: EmployeeService,
+    private router: Router
+  ) {}
 
   // Life cycle hook that runs on load
   ngOnInit() {
@@ -35,5 +39,10 @@ export class EmployeeTableComponent {
         console.error('Error deleting employee', err);
       },
     });
+  }
+
+  // Navigate to the editing form
+  editEmployee(id: number): void {
+    this.router.navigate(['/edit', id]);
   }
 }
