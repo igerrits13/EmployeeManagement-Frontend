@@ -8,43 +8,75 @@
   <!-- Use [(ngModl)] for two way binding between backend and frontend -->
 
   <div class="mb-3">
-    <label class="form-label">First Name: </label>
+    <label class="form-label">*First Name:</label>
     <input
+      required
+      #firstName="ngModel"
       class="form-control"
       type="text"
       name="firstName"
       [(ngModel)]="employee.firstName"
     />
+    <div *ngIf="firstName.invalid && (firstName.touched || firstName.dirty)">
+      <div class="text-danger" *ngIf="firstName.errors?.['required']">
+        First Name is required
+      </div>
+    </div>
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Last Name: </label>
+    <label class="form-label">*Last Name:</label>
     <input
+      required
+      #lastName="ngModel"
       class="form-control"
       type="text"
       name="lastName"
       [(ngModel)]="employee.lastName"
     />
+    <div *ngIf="lastName.invalid && (lastName.touched || lastName.dirty)">
+      <div class="text-danger" *ngIf="lastName.errors?.['required']">
+        Last Name is required
+      </div>
+    </div>
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Phone Number: </label>
+    <label class="form-label">*Phone Number:</label>
     <input
+      required
+      #phone="ngModel"
       class="form-control"
       type="phone"
       name="phone"
       [(ngModel)]="employee.phone"
     />
+    <div *ngIf="phone.invalid && (phone.touched || phone.dirty)">
+      <div class="text-danger" *ngIf="phone.errors?.['required']">
+        Phone Number is required
+      </div>
+    </div>
   </div>
 
   <div>
-    <label class="form-label">Email: </label>
+    <label class="form-label">*Email:</label>
     <input
+      required
+      email
+      #email="ngModel"
       class="form-control"
       type="email"
       name="email"
       [(ngModel)]="employee.email"
     />
+    <div *ngIf="email.invalid && (email.touched || email.dirty)">
+      <div class="text-danger" *ngIf="email.errors?.['required']">
+        Email is required
+      </div>
+      <div class="text-danger" *ngIf="email.errors?.['email']">
+        Email is invalid
+      </div>
+    </div>
   </div>
 
   <div class="mb-3">
