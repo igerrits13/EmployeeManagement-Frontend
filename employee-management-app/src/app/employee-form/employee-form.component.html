@@ -4,7 +4,11 @@
   {{ errorMessage }}
 </div>
 
-<form (ngSubmit)="onSubmit()" class="border rounded p-5 w-50 mb-5 mx-auto">
+<form
+  (ngSubmit)="onSubmit()"
+  #employeeForm="ngForm"
+  class="border rounded p-5 w-50 mb-5 mx-auto"
+>
   <!-- Use [(ngModl)] for two way binding between backend and frontend -->
 
   <div class="mb-3">
@@ -89,7 +93,11 @@
     />
   </div>
 
-  <button class="btn btn-primary" type="submit">
+  <button
+    class="btn btn-primary"
+    type="submit"
+    [disabled]="employeeForm.invalid"
+  >
     {{ isEditing ? "Edit" : "Create" }}
   </button>
 </form>
